@@ -125,7 +125,7 @@ export default function Displaydata() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={()=>updateData()}>Subscribe</Button>
+          <Button onClick={()=>updateData()}>Update</Button>
         </DialogActions>
       </Dialog>
     </div>
