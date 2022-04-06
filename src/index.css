@@ -5,19 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #1e9600; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+  /* background: #1e9600; /* fallback for old browsers 
+   background: -webkit-linear-gradient(
     to right,
     #ff0000,
     #fff200,
     #1e9600
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  ); /* Chrome 10-25, Safari 5.1-6 
   background: linear-gradient(
     to right,
     #ff0000,
     #fff200,
     #1e9600
-  );
+  ); */
+  background: hsla(120, 93%, 84%, 1);
+
+  background: linear-gradient(90deg, hsla(120, 93%, 84%, 1) 0%, hsla(185, 90%, 51%, 1) 100%);
+  
+  background: -moz-linear-gradient(90deg, hsla(120, 93%, 84%, 1) 0%, hsla(185, 90%, 51%, 1) 100%);
+
 }
 
 code {

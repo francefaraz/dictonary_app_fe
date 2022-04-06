@@ -19,10 +19,25 @@ export default function Displaydata() {
     const [id,setId]=useState("")
     const [data,setData]=useState("")
     const [open,setOpen]=useState(false)
+
+
     var BACKEND_URL =
     process.env.REACT_APP_BACKEND_URL ||
     "http://localhost:5000/api";
 // console.log(BACKEND_URL)
+const [open1, setOpen1] = useState(false);
+
+  const handleClickOpen1 = (a1) => {
+    setId(a1);
+    setOpen1(true);
+    
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+    setId("")
+  };
+
 
     const getData=async()=>{
         Axios.get(`${BACKEND_URL}`)
@@ -59,15 +74,19 @@ export default function Displaydata() {
         .catch((err)=>{
             console.log(err,"error of update ")
         })
+        setId("")
+        setData("")
        await handleClose()
     }
 
 
 
-    const deleteData = async(e)=>{
-        
-        console.log(e)
-        Axios.delete(`${BACKEND_URL}/${e}`,)
+    const deleteData = async()=>{
+     
+
+        setOpen1(false)
+        // console.log(e)
+        Axios.delete(`${BACKEND_URL}/${id}`,)
         .then((response)=>{
             // console.log(response,"res")
             // updateData()
@@ -76,6 +95,9 @@ export default function Displaydata() {
         .catch((err)=>{
             console.log(err,"err")
         })
+        setId("")
+        alert("data delted successfully")
+        
     }
 
   return (
@@ -99,8 +121,8 @@ export default function Displaydata() {
                     return <tr key={d._id}>
                         <td>{d.word1}</td>
                         <td colSpan="2">
-                        <Button variant="contained" onClick={()=>handleClickOpen(d._id,d.word1)} startIcon={<EditIcon/>}>EDIT</Button> &nbsp;
-                        <Button variant="contained" startIcon={<DeleteIcon />} onClick={()=>deleteData(d._id)}>DELETE</Button>
+                        <Button variant="contained" style={{backgroundColor:"orange"}} onClick={()=>handleClickOpen(d._id,d.word1)} startIcon={<EditIcon/>}>EDIT</Button> &nbsp;
+                        <Button variant="contained" style={{backgroundColor:"red"}} startIcon={<DeleteIcon />} onClick={()=>handleClickOpen1(d._id)}>DELETE</Button>
 
                         </td>
                     </tr>
@@ -126,6 +148,24 @@ export default function Displaydata() {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={()=>updateData()}>Update</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={open1}
+        onClose={handleClose1}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"ARE YOU SURE WANT TO DELETE"}
+        </DialogTitle>
+        
+        <DialogActions>
+          <Button onClick={handleClose1}>NO</Button>
+          <Button onClick={deleteData} autoFocus>
+            YES, DELETE
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
